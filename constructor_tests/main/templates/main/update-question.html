@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+
+{% block content_main %}
+<div class="test_content">
+<h3>Изменение вопроса: </h3>
+Отредактируйте вопрос и варианты ответов и сохраните результат.
+<hr class="hr-line">
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'update_question' test_id question_id %}" method="post">
+{% csrf_token %}
+
+
+<table>
+{% for f in question_form %}
+    <tr><td><b><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}:</b></label></td> <td>{{ f }}</td></tr>
+    <tr><td>{{ f.errors }}</td></tr>
+
+{% endfor %}
+
+{% for f in choice_forms %}
+    <tr><td><b><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}</b></label></td> <td>{{ f }}</td></tr>
+    <tr><td>{{ f.errors }}</td></tr>
+{% endfor %}
+</table>
+<hr class="hr-line">
+<div class="button-wrapper">
+    <button type="submit" class="button_test" name="button">Сохранить </button>
+</div>
+</form>
+</div>
+{% endblock %}

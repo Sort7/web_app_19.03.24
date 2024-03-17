@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+
+{% block content_main %}
+<div class="test_content">
+
+<h2>Добавление шкалы оценки теста</h2>
+
+<p>Количество оценок не ограниченно. Каждый вариант оценки добавляется по отдельности.</p>
+<p>Для добавления результата нужно заполнить каждое поле формы представленной ниже, где:</p>
+<ul>
+    <li><b>"Уровень результата"</b> - название уровня (к примеру: Низкий / Средний / Высокий). </li><br>
+    <li><b>"Верхняя граница"</b> - верхнее значение границы результата (в баллах), соответствующее уровню оценки.
+        Нижняя граница задается автоматически: для первого уровня она равна "0", для последующий, она
+        равна значению верхней границы предыдущего уровня </li><br>
+    <li><b>"Интерпретация оценки"</b> - описание того, что означает набранный уровень баллов.</li>
+</ul>
+<form action="{% url 'add_valuation' test_id %}" method="post">
+    {% csrf_token %}
+<table>
+{% for f in form %}
+    <tr><td><b><label class="form-label" for="{{ f.id_for_label }}" >{{f.label}}:</label></b></td> <td>{{ f }}</td></tr>
+    <tr><td>{{ f.errors }}</td></tr>
+{% endfor %}
+</table>
+<hr class="hr-line">
+<div class="button-wrapper">
+    <button type="submit" class="button_test" name="button1">Сохранить и добавить новую оценку </button>
+    <button type="submit" class="button_test" name="button2">Сохранить и завершить</button>
+</div>
+</form>
+</div>
+{% endblock %}

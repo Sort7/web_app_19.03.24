@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block content_main %}
+
+<h2>{{ test.title }}</h2>
+
+<h2>Анализ результатов теста</h2>
+
+<p> Результат прохождения теста: {{x.result}} (баллы)</p>
+<p> Ваш результат: {{rez.valuation}} (баллы)</p>
+<p> {{rez.analysis}} (баллы)</p>
+
+
+
+<a href="{% url 'test' test_id=test.id %}">Пройти тест заново?</a>
+
+
+{% endblock %}

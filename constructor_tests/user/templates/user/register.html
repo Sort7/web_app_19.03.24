@@ -1,0 +1,19 @@
+{% extends 'main/base.html' %}
+
+{% block content_main %}
+
+<ul class="list-articles">
+<!--	{% for t in tests_list %}-->
+<!--			<li>-->
+<!--				<div class="article-panel">-->
+<!--					<p class="first">Категория: {{t.category_id}}</p>-->
+<!--					<p class="last">Дата публикации: {{t.time_create|date:"Y-m-d"}}</p>-->
+<!--				</div>-->
+<!--				<h2>{{t.title}}</h2>-->
+<!--	        {{ t.review|linebreaks|truncatewords:50}}-->
+<!--			<div class="clear"></div>-->
+<!--			<p class="link-read-post"><a href="{{ t.get_absolute_url }}">Пройти тест</a></p> &lt;!&ndash; 'test' t.pk&ndash;&gt;-->
+<!--			</li>-->
+	{% endfor %}
+</ul>
+{% endblock %}

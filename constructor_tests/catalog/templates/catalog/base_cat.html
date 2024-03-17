@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+{% block left_column %}
+<table class="table-content" border=0 cellpadding="0" cellspacing="0">
+<!-- Sidebar слева -->
+	<td valign="top" class="left-chapters">
+	<ul id="leftchapters">
+		{% if category_selected == 0 %}
+		    <li class="selected">Все тесты:</li>
+		{% else %}
+		    <li><a href="{% url 'catalog' %}"> Все тесты:</a></li>
+		{% endif %}
+
+		{% for l in list_category %}
+		    {% if l.pk == category_selected %}
+		        <li class="selected">{{l.category}}</li>
+		    {% else %}
+		        <li><a href="{{ l.get_absolute_url }}"> {{l.category}}</a></li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+</td>
+<!-- Конец Sidebar'а -->
+<td valign="top" class="content">
+	<!-- Хлебные крошки -->
+	{% block breadcrumbs %}
+	{% endblock %}
+
+<!-- Блок контента -->
+	<div class="content-text">
+{% block content_cat %}
+{% endblock %}
+	</div>
+<!-- Конец блока контента -->
+
+</td></tr></table>
+</td></tr>
+
+{% endblock %}

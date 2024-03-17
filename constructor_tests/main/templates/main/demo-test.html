@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+
+{% block content_main %}
+<div class="test_content">
+<h3>Проверьте правильность заполнение описания и настроек Вашего теста:</h3>
+<hr class="hr-line">
+<table>
+    <tr><td><b>Название теста:</b></td><td>{{object.title}}</td></tr>
+    <tr><td><b>Описание теста:</b></td><td>{{object.review}}<br></td><tr>
+    <tr><td><b>Инструкция:</b></td><td>{{object.manual}}</td></tr>
+    <tr><td><b>Количество вопросов в тесте:</b></td><td>{{object.number_of_questions}}</td><tr>
+    <tr><td><b>Количество ответа на вопрос:</b></td><td>{{object.number_of_сhoice}}</td></tr>
+    <tr><td><b>Выбранная категория:</b></td><td>{{object.category_key}}</td><tr>
+    <tr><td><b>Отметка о размещении:</b></td><td>{{object.is_published}}</td><tr>
+</table><hr class="hr-line">
+
+<div class="button-wrapper">
+<a href="{% url 'update_tests' test_id=object.id %}"><button type="submit" class="button_test" name="button">Редактировать</button></a>
+<a href="{% url 'add_question' test_id=object.id %}"><button type="submit" class="button_test" name="button">Продолжить</button></a>
+</div>
+</div>
+{% endblock %}

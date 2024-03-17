@@ -1,0 +1,22 @@
+{% extends 'catalog/base_cat.html' %}
+
+{% block content_cat %}
+
+<ul class="list-articles">
+	{% for t in object_list %}
+			<li>
+				<div class="article-panel">
+					<p class="first">Категория: {{t.category_id}}</p>
+					<p class="last">Дата публикации: {{t.time_create|date:"Y-m-d"}}</p>
+				</div>
+				<h2>Тест: "{{t.title}}"</h2>
+	        {{ t.review|linebreaks|truncatewords:50}}
+			<div class="clear"></div>
+			<p class="link-read-post"><a href="{{ t.get_absolute_url }}">Пройти тест</a></p> <!-- 'test' t.pk-->
+			</li>
+	{% endfor %}
+</ul>
+{% endblock %}
+
+
+

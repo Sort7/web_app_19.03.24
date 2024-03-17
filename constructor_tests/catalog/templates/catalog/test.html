@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+{% block content_main %}
+<div class="test_content">
+
+<h2>Тест: "{{object.title}}"</h2>
+<table>
+    <tr><td><b>Категория:</b></td><td>{{object.category_key}}</td></tr>
+    <tr><td><b>Количество вопросов в тесте:</b></td><td>{{object.number_of_questions}}<br><br></td><tr>
+
+    <tr><td><b>Описание теста:</b></td><tr>
+    <tr><td>{{object.review}}<br><br></td><tr>
+
+    </tr><td><b>Инструкция:</b></td><tr>
+    </tr><td>{{object.manual}}<br><br><br><br></td><tr></tr>
+</table><hr class="hr-line">
+
+<div class="button-wrapper">
+<a href="{% url 'vote' test_id=object.id question_id=1 %}"><button class="button_test" type="submit" name="button">Начать тест</button></a>
+</div>
+
+</div>
+{% endblock %}

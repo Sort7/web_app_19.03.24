@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+
+{% block content_main %}
+<div class="test_content">
+<h2>{{title}}</h2>
+
+<br>
+<div class="article-panel"><b>Созданные тесты.</b></div>
+<table>
+{% for t in added_tests %}
+    <tr><td>Тест: {{t.title}} | Дата добавления: {{t.time_create}}</td> <td><p class="link-read-post"><a href=" ">Редактировать</a></p></td></tr>
+{% endfor %}
+</table>
+<br>
+
+<div class="article-panel"><b>Выполненные тесты.</b></div>
+
+<table>
+{% for t in completed_tests %}
+    <tr><td>Тест: {{t.test_key}} | Результат: {{t.result}}</td>
+		<td><p class="link-read-post"><a href="{% url 'test' t.pk %} ">Повторить</a></p></td>
+	</tr>
+{% endfor %}
+</table>
+
+</div>
+{% endblock %}

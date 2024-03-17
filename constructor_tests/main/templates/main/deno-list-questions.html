@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% block content_main %}
+<div class="test_content">
+<hr class="hr-line">
+<h3>Проверьте список подготовленных вопросов и ответов.</h3>
+<p>Чтобы изменить или варианты ответов к нему, нажите кнопку "Редакировать",
+	под вопросов который Вы хотие изменить.</p>
+<p>Чтобы завершить редактирование вопросов и перейти к следующему этапу
+	добавления теста нажмите кнопку «Продолжить» внизу страницы</p>
+
+	<ul class="list-articles">
+	{% for t in object_list %}
+			<li>
+				<div class="article-panel">
+					<p class="first"><b>Вопрос:</b>{{t.question_ordinal}}. {{t.question_text}}</p>
+				</div>
+				{% for choice in t.choice_set.all %}
+				<li><div><u>Ответ {{ choice.choice_ordinal }}.</u> "{{ choice.choice_text }}"</div>  <div><u> Баллы за ответ:</u> {{ choice.ball }} </div></li>
+				{% endfor %}
+			<div class="clear"></div>
+			<p class="link-read-post"><a href="{% url 'update_question' test_id  t.pk %}">Редактировать</a></p> <!-- 'test' t.pk-->
+			</li>
+
+	{% endfor %}
+</ul>
+<hr class="hr-line">
+<div class="button-wrapper">
+<a href="{% url 'add_valuation' test_id %}"><button type="submit" class="button_test" name="button">Продолжить</button></a>
+</div>
+</div>
+
+
+
+{% endblock %}

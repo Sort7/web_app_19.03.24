@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+
+{% block content_main %}
+<div class="test_content">
+<h1>Шкала оценки теста</h1>
+<p>Проверьте добавленные варианты шкалы оценки теста. При необходимости внесите правки нажав
+	"Редактировать" под соответствующим вариантом оценки.</p>
+<p>Если все данные указаны верно, то нажмите кнопку "Продолжить", чтобы перейти к финальному
+	этапу добавления теста.</p>
+<ul class="list-articles">
+	{% for t in object_list %}
+			<li>
+				<div class="article-panel">
+					<p class="first"><b>{{t.valuation}}</b></p>
+				</div>
+					<p class="first"><b>Количество баллов до:</b> {{t.value_max }}</p>
+
+			<div class="clear"><b>Описание:</b> {{t.analysis}}</div>
+			<p class="link-read-post"><a href="{{ t.get_absolute_url }}">Редактировать</a></p> <!-- 'test' t.pk-->
+			</li>
+
+	{% endfor %}
+</ul>
+<hr class="hr-line">
+<div class="button-wrapper">
+<a href="{% url 'add_final' test_id %}"><button type="submit" class="button_test" name="button">Продолжить</button></a>
+</div>
+</div>
+
+{% endblock %}

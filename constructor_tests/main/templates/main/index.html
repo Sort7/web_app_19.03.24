@@ -1,0 +1,13 @@
+{% extends 'main/base.html' %}
+
+{% block content_main %}
+{% if latest_test_list %}
+    <ul>
+    {% for test in latest_test_list %}
+        <li><a href="{% url 'detail' test.id %}">{{ test.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Тесты в каталоге отсутвуют.</p>
+{% endif %}
+{% endblock %}

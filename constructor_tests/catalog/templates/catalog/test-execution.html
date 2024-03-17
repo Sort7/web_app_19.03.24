@@ -1,0 +1,23 @@
+{% extends 'catalog/base_cat.html' %}
+
+{% block content_cat %}
+
+<h1>{{ quest.title }}</h1>
+
+<h3>{{ quest }}</h3>
+
+
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'test_execution' quest.id %}" method="post">
+{% csrf_token %}
+{% for v in quest.answers_set.all %}
+    <input type="radio" name="answers" id="answers{{ forloop.counter }}" value="{{ answers.id }}">
+    <label for="answers{{ forloop.counter }}">{{ v.answers_text }}</label><br>
+{% endfor %}
+<input type="submit" value="Голосовать">
+</form>
+
+
+{% endblock %}
