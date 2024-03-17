@@ -6,7 +6,7 @@ from django.views import generic
 from django.views.generic import DetailView, ListView, UpdateView
 
 from .forms import QuestionsForm, ChoiceForm, AddTestsForm, AddValuationForm
-from .models import Choice, Result, Tests, Questions, Valuation # Cat, Quest, Rez
+from .models import Choice, Result, Tests, Questions, Valuation
 
 
 menu = [{'title': 'ГЛАВНАЯ', 'url_name': 'index'},
