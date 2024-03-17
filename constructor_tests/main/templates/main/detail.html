@@ -1,6 +1,7 @@
 {% extends 'main/base.html' %}
 
 {% block content_main %}
+<div class="test_content">
 <h1>{{ test.title }}</h1>
 <h3>{{ question.question_text }}</h3>
 
@@ -12,7 +13,10 @@
     <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
 {% endfor %}
-<input type="submit" value="Голосовать">
+<br><br>
+<div class="button-wrapper">
+<button type="submit" class="button_test" name="button">Продолжить</button>
+</div>
 </form>
-
+</div>
 {% endblock %}
