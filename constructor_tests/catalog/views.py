@@ -6,6 +6,8 @@ from django.views.generic import ListView, DetailView
 from main.models import Categories, Result, Questions, Tests
 from main.views import menu, pageNotFound
 
+from catalog.utils import DataTestMixin
+
 
 class TestsCatalog(ListView):
     model = Tests
@@ -22,11 +24,16 @@ class TestsCatalog(ListView):
         return Tests.objects.filter(is_published=True)
 
 
-class Test(DetailView):
+class Test(DetailView): #DataTestMixin,
     model = Tests
     template_name = 'catalog/test.html'
     pk_url_kwarg = 'test_id'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['question'] = context['object'].questions_set.get(question_ordinal=1)
+        context.update(kwargs)
+        return context
 
 def category(request, category_id):
     object_list = Tests.objects.filter(category_key=category_id)

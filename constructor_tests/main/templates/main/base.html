@@ -438,7 +438,9 @@ ul.lang-list li a:hover {color: #fdc073;}
 	border: none;
 	border-top: 2px solid #444;
 }
-
+h2.center{
+text-align: center
+}
 	</style>
 
 </head>
@@ -449,14 +451,14 @@ ul.lang-list li a:hover {color: #fdc073;}
 {% block upper_menu %}
 		<div class="header">
 			<ul id="upper_menu" class="upper_menu">
-			<li class="logo"><a href="{% url 'index' %}"><div class="logo"></div></a></li>
+
 {% for m in upper_menu %}
 
 			<li><a href="{% url m.url_name %}">{{m.title}}</a></li>
 
 {% endfor %}
 {% if user.is_authenticated %}
-			<li class="last">{{user.username}} | <a href="{% url 'user:logout' %}"> Выход </a></li>
+			<li class="last"><a href="{%url 'user:user_office' request.user.username %}">{{user.username}} </a>| <a href="{% url 'user:logout' %}"> Выход </a></li>
 {% else %}
             <li class="last"><a href="{% url 'user:registration' %}"> Регистрация </a> | <a href="{% url 'user:login' %}"> Вход </a></li>
 {% endif %}
@@ -479,11 +481,7 @@ ul.lang-list li a:hover {color: #fdc073;}
 
 <!-- Footer -->
 <tr><td valign=top>
-	<div id="footer">
-		<p>
-<!--            &copy; 2024 Частичное или полное копирование информации с данного сайта для распространения на других ресурсах, допустимо только с согласия автора. -->
-    </p>
-	</div>
+
 </td></tr></table>
 <!-- Конец footer'а и страницы -->
 </body>

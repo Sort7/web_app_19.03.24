@@ -66,8 +66,10 @@ def detail(request, test_id, question_id):
 def vote(request, test_id, question_id):
     test = get_object_or_404(Tests, pk=test_id)
     question = test.questions_set.get(pk=question_id)
+    first_question = test.questions_set.get(question_ordinal=1)
+    first_question_id = first_question.id
     key = question.test_key
-    newid = question_id + 1
+    new_question_id = question_id + 1
     number_of_questions = test.number_of_questions
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
@@ -86,10 +88,10 @@ def vote(request, test_id, question_id):
             new_result = Result.objects.get(test_key=key)
             new_result.result += selected_choice.ball
             new_result.save()
-            if question_id == number_of_questions:
+            if question_id == first_question_id + number_of_questions -1:
                 return HttpResponseRedirect(reverse('results', kwargs={'test_id': test.id,}))
             else:
-                return HttpResponseRedirect(reverse('detail', kwargs={'test_id': test.id, 'question_id': newid}))
+                return HttpResponseRedirect(reverse('detail', kwargs={'test_id': test.id, 'question_id': new_question_id, }))
         else:
             new_result = Result.objects.create(user=request.user, result=0, the_best_result=0, test_key=key)
             new_result.result += selected_choice.ball
@@ -97,7 +99,9 @@ def vote(request, test_id, question_id):
         # Всегда возвращайте HttpResponseRedirect после успешной обработки
         #  # с данными POST. Это предотвращает повторную отправку данных, если пользователь
         #  # нажимает кнопку "Назад".
-        return HttpResponseRedirect(reverse('detail', kwargs={'test_id': 1, 'question_id': newid}))
+        return HttpResponseRedirect(reverse('detail', kwargs={'test_id': test.id, 'question_id': new_question_id}))
+
+
 
 # def vote(request, question_id):
 #     catig = get_object_or_404(Cat, pk=question_id)
@@ -126,7 +130,7 @@ def vote(request, test_id, question_id):
 
 def results(request, test_id):
     test = get_object_or_404(Tests, pk=test_id)
-    x = test.result_set.get(pk=test_id)
+    x = test.result_set.get(test_key=test_id)
     tes = test.valuation_set.all()
     rez = 0
     for t in tes:
@@ -241,16 +245,16 @@ def update_question(request, test_id, question_id):
     test = Tests.objects.get(pk=test_id)
     number_of_сhoice = test.number_of_сhoice
     if request.method == "POST":
-        question_form = QuestionsForm(request.POST, instance=Questions())
-        choice_forms = [ChoiceForm(request.POST, prefix=str(x), instance=Choice()) for x in range(0,number_of_сhoice)]
+        question_form = QuestionsForm(request.POST, instance=old_question)
+        choice_forms = [ChoiceForm(request.POST, prefix=str(x), instance=Choice.objects.filter(question_key=question_id)[x]) for x in range(0,number_of_сhoice)]
         if question_form.is_valid() and all([c.is_valid() for c in choice_forms]):
             new_question = question_form.save(commit=False)
             new_question.test_key = test
             new_question.save()
             for c in choice_forms:
                 new_choice = c.save(commit=False)
-                new_choice.question_key = new_question
-                new_choice.test_key = test
+                # new_choice.question_key = new_question
+                # new_choice.test_key = test
                 new_choice.save()
             return HttpResponseRedirect(reverse('demo_list_questions', kwargs={'test_id': test_id, }))
     else:
@@ -317,8 +321,13 @@ class DemoValuation(ListView):
 
 
 def add_final(request, test_id):
-    return HttpResponse("Завершение добавление теста %s." % test_id)
-
+    test = Tests.objects.get(pk=test_id)
+    data = {'test': test,
+            'menu': menu,
+            'test_id': test_id,
+            'title': 'Создание теста.'
+            }
+    return render(request, 'main/add-final.html', context=data)
 
 def test_valuation(request, test_id):
     return HttpResponse("Результаты теста %s." % test_id)
@@ -326,14 +335,20 @@ def test_valuation(request, test_id):
 
 class UpdateTest(UpdateView):
     model = Tests
-    template_name = 'main/add-tests.html'
-    context_object_name = 'test'
+    template_name = 'main/update-test.html'
+    # context_object_name = 'test'
     pk_url_kwarg = 'test_id'
-
     fields = ['title', 'review', 'manual', 'category_key', 'number_of_questions', 'number_of_сhoice',]
+
+    def get_success_url(self):
+        return reverse_lazy('add_question', kwargs={'test_id': self.object.pk,})
 
 class UpdateValuation(UpdateView):
     model = Valuation
     template_name = 'main/update-valuation.html'
-    pk_url_kwarg = 'test_id'
+    pk_url_kwarg = 'valuation_id'
     fields = ['valuation', 'value_max', 'analysis']
+
+    def get_success_url(self):
+        return reverse_lazy('demo_valuation', kwargs={'test_id': self.object.test_key_id})
+

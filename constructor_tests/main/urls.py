@@ -22,11 +22,12 @@ urlpatterns = [
 
     path('add-tests/', add_tests, name='add_tests'),
     path('<int:test_id>/demo-test/', DemoTest.as_view(), name='demo_test'),
-    path('<int:test_id>/update-tests/', UpdateTest.as_view(), name='update_tests'),
+    path('<int:test_id>/update-test/', UpdateTest.as_view(), name='update-test'),
 
     path('<int:test_id>/add-valuation/', add_valuation, name='add_valuation'),
     path('<int:test_id>/demo-valuation/', DemoValuation.as_view(), name='demo_valuation'),
-    path('<int:test_id>/update-valuation/', UpdateValuation.as_view(), name='update_valuation'),
-    # path('<int:test_id>/add-final/', add_final, name='add_final'),
+    path('<int:test_id>/<int:valuation_id>/update-valuation/', UpdateValuation.as_view(), name='update_valuation'),
+    path('<int:test_id>/add-final/', add_final, name='add_final'),
 
+    # path('<int:test_id>/update-whole-test/', update_whole_test, name='update_whole_test'),
 ]

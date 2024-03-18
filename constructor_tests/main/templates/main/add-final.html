@@ -1,0 +1,16 @@
+{% extends 'main/base.html' %}
+
+{% block content_main %}
+<div class="test_content">
+
+<h2 class="center">Вы успешно добавили тест: </h2>
+<h2 class="center">"{{test.title}}"</h2>
+<br><br>
+<hr class="hr-line">
+<div class="button-wrapper">
+<a href="{% url 'test' test.id %}"><button type="submit" class="button_test" name="button">Пройти</button></a>
+<a href="#"><button type="submit" class="button_test" name="button">Редактировать</button></a>
+</div>
+</div>
+
+{% endblock %}

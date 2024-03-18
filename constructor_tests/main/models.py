@@ -86,4 +86,4 @@ class Valuation(models.Model):
         return self.valuation
 
     def get_absolute_url(self):
-        return reverse('update_valuation', kwargs={'test_id': self.pk})
+        return reverse('update_valuation', kwargs={'valuation_id': self.pk, 'test_id': self.test_key_id,})
