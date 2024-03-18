@@ -36,13 +36,14 @@ p.link-read-post {
 p.link-read-post a {
 	padding: 10px;
 	min-width: 100px;
-	background: #aaa;
+	background: #24384b;
 	color: #fff;
 	text-decoration: none;
+	font-weight: 500;
 }
 
 div.article-panel {
-    background: #eee;
+    background: #cee7f3;
     padding: 5px 10px 5px 10px;
     box-sizing: border-box;
     overflow: hidden;
@@ -95,7 +96,7 @@ ul.upper_menu {
 	font-size: 17px;
 	font-weight: 700;
 	overflow: hidden;
-	font-family: 'Verdana', sans-serif;
+	font-family: 'Arial';
 }
 
 ul.upper_menu li {
@@ -106,7 +107,7 @@ ul.upper_menu li.logo {margin: 0;}
 ul.upper_menu li.last {float: right;}
 
 ul.upper_menu li a {
-	color: #7e9fc1;
+	color: #d7e6ed;
 	text-decoration: none;
 }
 ul.upper_menu li a:hover {
@@ -157,6 +158,24 @@ div.button {
 	font-size: 20px;
 }
 
+button.button_test {
+	background: #24384b;
+	max-width: 500px;
+	margin: 0px 10px ;
+	padding: 5px 20px 5px 20px;
+	border-radius: 10px;
+	font-size: 20px;
+	color: #ffffff;
+	cursor: pointer;
+}
+
+
+.button-wrapper{
+	display: flex;
+	justify-content: center;
+
+}
+
 .table-content {
 	width: 100%;
 	min-height: 100%;
@@ -165,7 +184,7 @@ div.button {
 
 .left-chapters {
 	margin: 0;
-	background: #eee;
+	background: #d7e6ed;
 	border-right: 1px solid #ccc;
 	min-height: 100%;
 }
@@ -183,7 +202,7 @@ div.button {
 }
 .left-chapters ul li.selected {color: #0059b2; }
 .left-chapters ul li a {
-	color: #444;
+	color: #24384b;
 	text-decoration: none;
 }
 .left-chapters ul li a:hover { color: #CC0000; }
@@ -207,7 +226,7 @@ div.button {
 }
 
 .content {
-	padding: 40px 20px 20px 40px;
+	padding: 0px 20px 20px 40px;
 	width: 100%;
 	box-sizing: border-box;
 }
@@ -267,8 +286,8 @@ ul.content-table li a:hover {color: #F0711C;}
 .content-text {
 	margin: 60px 0 0 30px;
 	color: #000;
-	font-size: 20px;
-	font-family: Yandex Sans Display Light;
+	font-size: 17px;
+	font-family: 'Arial';
 }
 .content-text h1 {font-size: 32px;}
 
@@ -379,7 +398,7 @@ ul.lang-list li a:hover {color: #fdc073;}
 
 .form-label {
     display: inline-block;
-    min-width: 150px;
+    min-width: 250px;
     vertical-align: top;
 }
 
@@ -394,12 +413,22 @@ ul.lang-list li a:hover {color: #fdc073;}
     font-size: 16px;
 }
 
-.xxx1 {
+.test_content {
   width: 60%;
   margin-left: auto;
   margin-right: auto;
   border: 2px solid #959a82;
   background-color: #FFFFFF;
   padding: 30px 30px 30px 20px;
+  min-height: 100%;
 }
-
+.hr-line {
+	margin: 30px 0px 0px 0px;
+	padding: 0px 0px 60px 0px;
+	height: 0;
+	border: none;
+	border-top: 2px solid #444;
+}
+h2.center{
+text-align: center
+}

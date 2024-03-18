@@ -14,12 +14,11 @@
 <br>
 
 <div class="article-panel"><b>Выполненные тесты.</b></div>
-
+<br>
 <table>
-{% for t in completed_tests %}
-    <tr><td>Тест: {{t.test_key}} | Результат: {{t.result}}</td>
-		<td><p class="link-read-post"><a href="{% url 'test' t.pk %} ">Повторить</a></p></td>
-	</tr>
+{% for c in completed_tests %}
+    <tr><td>Тест: {{c.test_key}} | Результат: {{c.result}} (баллы) <br></td><td> </td></tr>
+     <tr><td><br></td></tr>
 {% endfor %}
 </table>
 
